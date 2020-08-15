@@ -1,0 +1,9 @@
+{
+  "name": "500L-OCR",
+  "version": "1.0.0",
+  "description": "A 500-line OCR",
+  "main": "index.js",
+  "repository": "https://github.com/robturtle-500L/ocr",
+  "author": "Yang Liu <jeremyrobturtle@gmail.com>",
+  "license": "MIT"
+}
