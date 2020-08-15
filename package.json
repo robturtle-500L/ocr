@@ -8,5 +8,8 @@
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.26.12"
+  },
+  "scripts": {
+    "start": "yarn browser-sync start -s -f ."
   }
 }
