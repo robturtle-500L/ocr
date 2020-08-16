@@ -1,0 +1,2 @@
+class OCRNeuralNetwork(object):
+    pass
