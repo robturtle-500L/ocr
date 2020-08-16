@@ -10,6 +10,7 @@
     "browser-sync": "^2.26.12"
   },
   "scripts": {
-    "start": "yarn browser-sync start -s -f ."
+    "start": "yarn browser-sync start -s -f .",
+    "setup": "pip install -r requirements.txt"
   }
 }

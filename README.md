@@ -8,6 +8,6 @@ yarn start
 
 Server
 ```
-pip install -r requirements.txt
+yarn setup
 ./server.py
 ```
