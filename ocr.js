@@ -83,20 +83,29 @@
   }
 
   function sendData(json) {
-    console.log(json);
+    var xmlhttp = new XMLHttpRequest();
+    var payload = JSON.stringify(json);
+    xmlhttp.open('POST', 'http://localhost:5000');
+    xmlhttp.setRequestHeader('Content-Type', 'application/json');
+    xmlhttp.onload = sendDataEnd;
+    xmlhttp.onerror = sendDataError;
+    xmlhttp.send(payload);
+    return xmlhttp;
   }
 
-  function sendDataEnd(xmlHttp) {
+  function sendDataEnd(e) {
+    var xmlHttp = e.target;
     if (xmlHttp.status !== 200) {
-      return console.log('Server returned status ' + xmlHttp.status);
+      return alert('Server returned status ' + xmlHttp.status);
     }
     var res = JSON.parse(xmlHttp.responseText);
+    console.log(res);
     if (res.type === 'test') {
       alert('The neural network says it is a ' + res.result);
     }
   }
 
-  function sendDataError(err) {
+  function sendDataError(e) {
     alert('Error connecting to server: ' + e.target.statusText);
   }
 
