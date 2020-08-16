@@ -5,11 +5,13 @@ import json
 import ocr
 import numpy as np
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from livereload import Server
 
 HIDDEN_NODE_COUNT = 15
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/', methods=['GET'])

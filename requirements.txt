@@ -1,3 +1,4 @@
 flask
+flask-cors
 livereload==2.5.1
 numpy
