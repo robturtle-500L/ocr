@@ -6,7 +6,6 @@ import ocr
 import numpy as np
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from livereload import Server
 
 HIDDEN_NODE_COUNT = 15
 
@@ -21,11 +20,9 @@ def about():
 
 @app.route('/', methods=['POST'])
 def add_sample():
-    content = request.json
-    return jsonify(echo=content)
+    sample = request.json
+    return jsonify(echo=sample)
 
 
 app.debug = True
-
-server = Server(app.wsgi_app)
-server.serve()
+app.run()
