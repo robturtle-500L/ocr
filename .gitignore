@@ -1,3 +1,5 @@
 node_modules/
 __pycache__/
 .vscode/
+training_set.csv
+test_set.csv
