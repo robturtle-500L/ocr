@@ -7,12 +7,16 @@ import numpy as np
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-HIDDEN_NODE_COUNT = 15
-TRAINING_SET_FILE_NAME = 'training_set.csv'
-TEST_SET_FILE_NAME = 'test_set.csv'
-
 app = Flask(__name__)
 CORS(app)
+
+HIDDEN_NODE_COUNT = 15
+ann = ocr.OCRNeuralNetwork(HIDDEN_NODE_COUNT)
+
+if not ann.is_trained:
+    print("Training the neural network...")
+    ann.train()
+    print("Done.")
 
 
 @app.route('/', methods=['GET'])
@@ -24,15 +28,16 @@ def about():
 def add_sample():
     sample = request.json
     sample_type = sample['type']
-    record = "{},{}\n".format(sample['label'], sample['y0'])
+    record = "{}:{}\n".format(sample['label'], sample['y0'])
     if sample_type == 'train':
-        with open(TRAINING_SET_FILE_NAME, 'a') as f:
+        with open(ocr.TRAINING_SET_FILE_NAME, 'a') as f:
             f.write(record)
         return jsonify(success=True)
     elif sample_type == 'test':
-        with open(TEST_SET_FILE_NAME, 'a') as f:
+        with open(ocr.TEST_SET_FILE_NAME, 'a') as f:
             f.write(record)
-        return jsonify(type='test', result=6)
+        predict = ann.predict(sample['y0'])
+        return jsonify(type='test', result=predict)
     else:
         return jsonify(error='Unsupported type: {}'.format(sample_type))
     return jsonify(echo=sample)
